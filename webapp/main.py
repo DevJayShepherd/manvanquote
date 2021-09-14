@@ -3,12 +3,12 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
-from core.config import settings
-from core.postcodes import data
+from webapp.core.config import settings
+from webapp.core.postcodes import data
 
 app = FastAPI(title=settings.PROJECT_NAME, version=settings.PROJECT_VERSION)
-templates = Jinja2Templates(directory="templates")
-app.mount("/webapp/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="webapp/templates")
+app.mount("/webapp/static", StaticFiles(directory="webapp/static"), name="static")
 
 
 @app.get("/")
