@@ -30,3 +30,8 @@ def sitemap(request: Request):
     postcodes = data
 
     return templates.TemplateResponse(name="sitemap.html", context={"request": request, "postcodes": data})
+
+
+@app.get("/sitemap-xml")
+def sitemap(request: Request):
+    return templates.TemplateResponse(name="sitemap.xml", context={"request": request})
