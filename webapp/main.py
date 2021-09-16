@@ -18,10 +18,11 @@ def hello_api(request: Request):
 
 @app.get("/man-and-van/{location}")
 def location_page(location: str, request: Request):
+    postcode = location
 
     item = location
 
-    return templates.TemplateResponse(name="homepage.html", context={"request": request, "item": item})
+    return templates.TemplateResponse(name="homepage.html", context={"request": request, "item": item, "postcode": postcode})
 
 
 @app.get("/sitemap")
