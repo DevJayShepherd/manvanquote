@@ -4,6 +4,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
 from webapp.core.config import settings
+from webapp.core.postcode_description import PostcodeBuilder
 from webapp.core.postcodes import data
 
 app = FastAPI(title=settings.PROJECT_NAME, version=settings.PROJECT_VERSION)
@@ -20,9 +21,13 @@ def hello_api(request: Request):
 def location_page(location: str, request: Request):
     postcode = location
 
+    postcode_object = PostcodeBuilder()
+    postcode_list = postcode_object.get_all_postcodes(postcode)
+
     item = location
 
-    return templates.TemplateResponse(name="homepage.html", context={"request": request, "item": item, "postcode": postcode})
+    return templates.TemplateResponse(name="homepage.html", context={"request": request, "item": item, "postcode": postcode,
+                                                                     "postcode_list": postcode_list})
 
 
 @app.get("/sitemap")
